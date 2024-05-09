@@ -1,17 +1,13 @@
-function decodeString(s) {
-  const stack = [];
-  for (const char of s) {
-    if (char !== "]") stack.push(char);
-    else {
-      let str = "";
-      while (stack.length && stack[stack.length - 1] !== "[")
-        str = stack.pop() + str;
-      stack.pop();
-      let num = "";
-      while (stack.length && !isNaN(stack[stack.length - 1]))
-        num = stack.pop() + num;
-      stack.push(str.repeat(parseInt(num)));
-    }
-  }
-  return stack.join("");
+function rightSideView(root) {
+  if (!root) return [];
+  const result = [];
+  let level = 0;
+  const traverse = (node, level) => {
+    if (!node) return;
+    if (result[level] === undefined) result[level] = node.val;
+    traverse(node.right, level + 1);
+    traverse(node.left, level + 1);
+  };
+  traverse(root, level);
+  return result;
 }

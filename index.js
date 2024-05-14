@@ -1,14 +1,6 @@
-function subarraySum(nums, k) {
-  const map = new Map();
-  map.set(0, 1);
-  let count = 0;
-  let sum = 0;
-  for (const num of nums) {
-    sum += num;
-    if (map.has(sum - k)) {
-      count += map.get(sum - k);
-    }
-    map.set(sum, (map.get(sum) || 0) + 1);
+const gcd = (a, b) => {
+  if (b === 0) {
+    return a;
   }
-  return count;
-}
+  return gcd(b, a % b);
+};
